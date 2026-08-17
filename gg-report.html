@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Guardians – Case Study</title>
+  <style>
+    :root {
+      --text: #111;
+      --muted: #666;
+      --light: #f4f5f2;
+      --border: #e2e4de;
+      --accent: #1f4d36;
+      --accent-soft: #e8f0eb;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      line-height: 1.65;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+    /* Top navigation */
+    .top-nav {
+      padding: 28px 0 0;
+    }
+    .top-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .top-nav a:hover {
+      color: var(--accent);
+    }
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 64px 0 60px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: end;
+    }
+    .hero-content {
+      max-width: 520px;
+    }
+    .project-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(34px, 4.5vw, 50px);
+      font-weight: 650;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+    .role {
+      font-size: 16px;
+      color: var(--muted);
+    }
+    .hero-image {
+      aspect-ratio: 4 / 5;
+      background: var(--light);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .hero-image:hover {
+      border-color: #ccc;
+    }
+    .hero-image::after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(0,0,0,0.05);
+      pointer-events: none;
+    }
+    /* ---------- SECTIONS ---------- */
+    section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .section-text {
+      font-size: 17.5px;
+      max-width: 620px;
+      color: var(--text);
+    }
+    /* Challenge */
+    .challenge {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    /* Two column */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+    /* Images */
+    .image-block {
+      margin-top: 48px;
+    }
+    .image-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 18px;
+    }
+    .image-grid.alt {
+      grid-template-columns: 0.75fr 1.25fr;
+    }
+    .placeholder {
+      background: var(--light);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 13px;
+      text-align: center;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .placeholder:hover {
+      border-color: #ccc;
+    }
+    .placeholder.tall {
+      aspect-ratio: 3 / 4;
+    }
+    .placeholder.wide {
+      aspect-ratio: 16 / 10;
+    }
+    .caption {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 12px;
+      max-width: 520px;
+      line-height: 1.5;
+    }
+    /* Full width image */
+    .full-image {
+      margin: 20px -32px 0;
+      aspect-ratio: 21 / 9;
+      background: var(--light);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+    /* Outcome */
+    .outcome {
+      max-width: 640px;
+    }
+    .outcome p {
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    /* Navigation */
+    .case-nav {
+      padding: 56px 0 90px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 15px;
+      border-top: 1px solid var(--border);
+    }
+    .case-nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .case-nav a:hover {
+      color: var(--accent);
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero,
+      .challenge,
+      .two-col,
+      .image-grid,
+      .image-grid.alt {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+      .hero {
+        padding: 40px 0 40px;
+      }
+      section {
+        padding: 56px 0;
+      }
+      .full-image {
+        margin-left: 0;
+        margin-right: 0;
+        aspect-ratio: 16 / 9;
+      }
+      .two-col {
+        gap: 48px;
+      }
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 0 20px;
+      }
+      h1 {
+        font-size: 32px;
+      }
+      .section-text {
+        font-size: 16.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Top link -->
+    <div class="top-nav">
+      <a href="#">← All work</a>
+    </div>
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-content">
+        <div class="project-label">City of Vaughan · 2026</div>
+        <h1>Green Guardians<br>Year One Annual Report</h1>
+        <div class="role">Creative direction · Print & digital</div>
+      </div>
+      <div class="hero-image">
+        Cover or strongest opening spread
+      </div>
+    </header>
+    <!-- CHALLENGE -->
+    <section>
+      <div class="challenge">
+        <div class="section-label">The Challenge</div>
+        <p class="section-text">
+          The City needed its first annual report for the new Green Guardians strategy.
+          Most documents like this were dense, overly long, and easy to ignore.
+          The goal was to make the report feel worth opening — and worth keeping.
+        </p>
+      </div>
+    </section>
+    <!-- APPROACH + DESIGN SYSTEM -->
+    <section>
+      <div class="two-col">
+        <div>
+          <div class="section-label">Approach</div>
+          <p class="section-text">
+            We approached it as a brand piece, not a compliance document.
+            The focus was simple: strong photography of real community activity,
+            a tight green-and-yellow system, and a hierarchy that puts the important numbers first.
+          </p>
+        </div>
+        <div>
+          <div class="section-label">Design System & Key Decisions</div>
+          <p class="section-text">
+            Angled headers, large impact figures, and consistent spacing formed the core system across 28 pages.
+            We used light green paper with white data panels so the metrics would stand out, and built the system so it could move directly into the presentation decks.
+            The report and decks were designed as one connected set of materials.
+          </p>
+        </div>
+      </div>
+      <!-- Images -->
+      <div class="image-block">
+        <div class="image-grid">
+          <div class="placeholder wide">
+            Interior spread – photographic
+          </div>
+          <div class="placeholder tall">
+            Detail – white data panels on light green
+          </div>
+        </div>
+        <p class="caption">Selected spreads showing hierarchy, photography direction, and the data panel treatment.</p>
+      </div>
+      <div class="image-block">
+        <div class="image-grid alt">
+          <div class="placeholder tall">
+            Typography & section header detail
+          </div>
+          <div class="placeholder wide">
+            Metrics / program update spread
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Full width -->
+    <div class="full-image">
+      Wide overview – multiple spreads or full report feeling
+    </div>
+    <!-- OUTCOME -->
+    <section>
+      <div class="outcome">
+        <div class="section-label">Outcome</div>
+        <p>
+          The report is cleaner and more deliberate than a typical City publication.
+          It raised the bar for the Green Guardians program and gave future reports and presentations a system they can actually use.
+        </p>
+      </div>
+    </section>
+    <!-- Bottom nav -->
+    <div class="case-nav">
+      <a href="#">← Previous project</a>
+      <a href="#">Next project →</a>
+    </div>
+  </div>
+</body>
+</html>
