@@ -18,6 +18,9 @@
       padding: 0;
       box-sizing: border-box;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       color: var(--text);
@@ -28,38 +31,23 @@
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 32px;
+      padding: 0 clamp(20px, 4vw, 32px);
     }
-    /* Top navigation */
-    .top-nav {
-      padding: 28px 0 0;
-    }
-    .top-nav a {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .top-nav a:hover {
-      color: var(--accent);
-    }
-    /* ---------- HERO (full-width cover) ---------- */
+    /* ---------- HERO (full-screen cover) ---------- */
     .hero {
       position: relative;
-      margin: 32px -32px 0;
-      height: 65vh;
-      min-height: 420px;
-      max-height: 720px;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh; /* better mobile support */
+      min-height: 480px;
       background-color: var(--light);
       background-image: url('images/gg-cover.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       display: flex;
-      align-items: flex-end;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      justify-content: space-between;
     }
     .hero::before {
       content: "";
@@ -67,17 +55,33 @@
       inset: 0;
       background: linear-gradient(
         to top,
-        rgba(0, 0, 0, 0.62) 0%,
-        rgba(0, 0, 0, 0.25) 45%,
-        rgba(0, 0, 0, 0.08) 100%
+        rgba(0, 0, 0, 0.65) 0%,
+        rgba(0, 0, 0, 0.28) 40%,
+        rgba(0, 0, 0, 0.18) 100%
       );
       pointer-events: none;
+    }
+    /* Top nav over the cover */
+    .top-nav {
+      position: relative;
+      z-index: 2;
+      padding: clamp(20px, 3vw, 32px) clamp(20px, 4vw, 40px) 0;
+    }
+    .top-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .top-nav a:hover {
+      color: #fff;
     }
     .hero-content {
       position: relative;
       z-index: 1;
-      padding: 48px 48px 44px;
-      max-width: 620px;
+      padding: 0 clamp(20px, 4vw, 48px) clamp(36px, 6vw, 56px);
+      max-width: 680px;
       color: #fff;
     }
     .project-label {
@@ -86,24 +90,24 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #b8d9c4;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     h1 {
-      font-size: clamp(34px, 4.5vw, 50px);
+      font-size: clamp(32px, 5.5vw, 52px);
       font-weight: 650;
       line-height: 1.12;
       letter-spacing: -0.03em;
       margin-bottom: 14px;
       color: #fff;
-      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+      text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
     }
     .role {
-      font-size: 16px;
+      font-size: clamp(15px, 1.6vw, 17px);
       color: rgba(255, 255, 255, 0.88);
     }
     /* ---------- SECTIONS ---------- */
     section {
-      padding: 72px 0;
+      padding: clamp(48px, 8vw, 80px) 0;
       border-top: 1px solid var(--border);
     }
     .section-label {
@@ -115,27 +119,27 @@
       margin-bottom: 16px;
     }
     .section-text {
-      font-size: 17.5px;
+      font-size: clamp(16px, 1.7vw, 17.5px);
       max-width: 620px;
       color: var(--text);
     }
     /* Challenge */
     .challenge {
       display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 40px;
+      grid-template-columns: minmax(120px, 180px) 1fr;
+      gap: clamp(24px, 4vw, 40px);
       align-items: start;
     }
     /* Two column */
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 72px;
+      gap: clamp(36px, 6vw, 72px);
       align-items: start;
     }
     /* Images */
     .image-block {
-      margin-top: 48px;
+      margin-top: clamp(32px, 5vw, 48px);
     }
     .image-grid {
       display: grid;
@@ -175,7 +179,7 @@
     }
     /* Full width image */
     .full-image {
-      margin: 20px -32px 0;
+      margin: 20px calc(-1 * clamp(20px, 4vw, 32px)) 0;
       aspect-ratio: 21 / 9;
       background: var(--light);
       border-top: 1px solid var(--border);
@@ -193,16 +197,18 @@
       max-width: 640px;
     }
     .outcome p {
-      font-size: 18px;
+      font-size: clamp(16.5px, 1.8vw, 18px);
       line-height: 1.7;
     }
     /* Navigation */
     .case-nav {
-      padding: 56px 0 90px;
+      padding: clamp(40px, 6vw, 56px) 0 clamp(60px, 8vw, 90px);
       display: flex;
       justify-content: space-between;
+      gap: 24px;
       font-size: 15px;
       border-top: 1px solid var(--border);
+      flex-wrap: wrap;
     }
     .case-nav a {
       color: var(--text);
@@ -213,17 +219,8 @@
     .case-nav a:hover {
       color: var(--accent);
     }
-    /* Responsive */
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 900px) {
-      .hero {
-        margin-left: -20px;
-        margin-right: -20px;
-        height: 55vh;
-        min-height: 360px;
-      }
-      .hero-content {
-        padding: 36px 24px 32px;
-      }
       .challenge,
       .two-col,
       .image-grid,
@@ -231,49 +228,59 @@
         grid-template-columns: 1fr;
         gap: 28px;
       }
-      section {
-        padding: 56px 0;
-      }
       .full-image {
         margin-left: 0;
         margin-right: 0;
         aspect-ratio: 16 / 9;
       }
-      .two-col {
-        gap: 48px;
+      .hero-content {
+        max-width: 100%;
       }
     }
     @media (max-width: 600px) {
-      .container {
-        padding: 0 20px;
+      .hero {
+        min-height: 100svh; /* small viewport height for mobile */
+      }
+      .top-nav {
+        padding-top: 18px;
+      }
+      .project-label {
+        font-size: 12px;
+        margin-bottom: 12px;
       }
       h1 {
-        font-size: 32px;
+        font-size: clamp(28px, 8vw, 36px);
       }
       .section-text {
-        font-size: 16.5px;
+        font-size: 16px;
       }
-      .hero {
-        height: 50vh;
-        min-height: 320px;
+      .case-nav {
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+    /* Very small screens */
+    @media (max-width: 380px) {
+      h1 {
+        font-size: 26px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Top link -->
+  <!-- Full-screen cover hero -->
+  <header class="hero">
     <div class="top-nav">
       <a href="#">← All work</a>
     </div>
-    <!-- HERO - Full width cover -->
-    <header class="hero">
-      <div class="hero-content">
-        <div class="project-label">City of Vaughan · 2026</div>
-        <h1>Green Guardians<br>Year One Annual Report</h1>
-        <div class="role">Creative direction · Print & digital</div>
-      </div>
-    </header>
+    <div class="hero-content">
+      <div class="project-label">City of Vaughan · 2026</div>
+      <h1>Green Guardians<br>Year One Annual Report</h1>
+      <div class="role">Creative direction · Print & digital</div>
+    </div>
+  </header>
+
+  <div class="container">
     <!-- CHALLENGE -->
     <section>
       <div class="challenge">
