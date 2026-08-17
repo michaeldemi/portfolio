@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Green Guardians – Case Study</title>
+  <!-- Preload cover image for faster LCP -->
+  <link rel="preload" as="image" href="images/gg-cover.jpg" fetchpriority="high">
   <style>
     :root {
       --text: #111;
@@ -12,28 +14,52 @@
       --border: #e2e4de;
       --accent: #1f4d36;
       --accent-soft: #e8f0eb;
+
+      /* Spacing scale */
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 24px;
+      --space-5: 32px;
+      --space-6: 48px;
+      --space-7: 64px;
+      --space-8: 80px;
+
+      /* Safe areas */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
     }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     html {
       scroll-behavior: smooth;
     }
+
     body {
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       color: var(--text);
       line-height: 1.65;
       background: #fff;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden; /* prevent horizontal scroll from full-bleed */
+      overflow-x: hidden;
     }
+
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 0 clamp(20px, 4vw, 32px);
+      padding-left: max(var(--space-4), var(--safe-left));
+      padding-right: max(var(--space-4), var(--safe-right));
+      padding-left: max(clamp(20px, 4vw, 32px), var(--safe-left));
+      padding-right: max(clamp(20px, 4vw, 32px), var(--safe-right));
     }
+
     /* ---------- HERO (full-screen cover) ---------- */
     .hero {
       position: relative;
@@ -50,6 +76,7 @@
       flex-direction: column;
       justify-content: space-between;
     }
+
     .hero::before {
       content: "";
       position: absolute;
@@ -62,37 +89,52 @@
       );
       pointer-events: none;
     }
+
     /* Top nav over the cover */
     .top-nav {
       position: relative;
       z-index: 2;
-      padding: clamp(20px, 3vw, 32px) clamp(20px, 4vw, 40px) 0;
+      padding-top: max(clamp(20px, 3vw, 32px), var(--safe-top));
+      padding-left: max(clamp(20px, 4vw, 40px), var(--safe-left));
+      padding-right: max(clamp(20px, 4vw, 40px), var(--safe-right));
     }
+
     .top-nav a {
       font-size: 14px;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.85);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s ease;
+      border-radius: 2px;
     }
+
     .top-nav a:hover {
       color: #fff;
     }
+
+    .top-nav a:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 4px;
+    }
+
     .hero-content {
       position: relative;
       z-index: 1;
-      padding: 0 clamp(20px, 4vw, 48px) clamp(36px, 6vw, 56px);
+      padding: 0 max(clamp(20px, 4vw, 48px), var(--safe-left)) max(clamp(36px, 6vw, 56px), var(--safe-bottom));
+      padding-right: max(clamp(20px, 4vw, 48px), var(--safe-right));
       max-width: 680px;
       color: #fff;
     }
+
     .project-label {
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: #b8d9c4;
-      margin-bottom: 16px;
+      margin-bottom: var(--space-3);
     }
+
     h1 {
       font-size: clamp(32px, 5.5vw, 52px);
       font-weight: 650;
@@ -102,28 +144,33 @@
       color: #fff;
       text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
     }
+
     .role {
       font-size: clamp(15px, 1.6vw, 17px);
       color: rgba(255, 255, 255, 0.88);
     }
+
     /* ---------- SECTIONS ---------- */
     section {
       padding: clamp(48px, 8vw, 80px) 0;
       border-top: 1px solid var(--border);
     }
+
     .section-label {
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: var(--space-3);
     }
+
     .section-text {
       font-size: clamp(16px, 1.7vw, 17.5px);
       max-width: 620px;
       color: var(--text);
     }
+
     /* Challenge & Outcome share the same layout */
     .challenge,
     .outcome {
@@ -132,6 +179,7 @@
       gap: clamp(24px, 4vw, 40px);
       align-items: start;
     }
+
     /* Two column */
     .two-col {
       display: grid;
@@ -139,18 +187,22 @@
       gap: clamp(36px, 6vw, 72px);
       align-items: start;
     }
+
     /* Images */
     .image-block {
       margin-top: clamp(32px, 5vw, 48px);
     }
+
     .image-grid {
       display: grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap: 18px;
     }
+
     .image-grid.alt {
       grid-template-columns: 0.75fr 1.25fr;
     }
+
     .placeholder {
       background: var(--light);
       border: 1px solid var(--border);
@@ -160,32 +212,36 @@
       color: #888;
       font-size: 13px;
       text-align: center;
-      padding: 24px;
-      transition: border-color 0.2s;
+      padding: var(--space-4);
+      transition: border-color 0.2s ease;
     }
+
     .placeholder:hover {
       border-color: #ccc;
     }
+
     .placeholder.tall {
       aspect-ratio: 3 / 4;
     }
+
     .placeholder.wide {
       aspect-ratio: 16 / 10;
     }
+
     .caption {
       font-size: 13px;
       color: var(--muted);
-      margin-top: 12px;
+      margin-top: var(--space-2);
       max-width: 520px;
       line-height: 1.5;
     }
-    /* Full width image – reliable full-bleed */
+
+    /* Full width image – robust full-bleed */
     .full-image {
       width: 100vw;
       max-width: 100vw;
-      margin-left: calc(50% - 50vw);
-      margin-right: calc(50% - 50vw);
-      margin-top: 20px;
+      margin-inline: calc(50% - 50vw);
+      margin-top: var(--space-4);
       aspect-ratio: 21 / 9;
       background: var(--light);
       border-top: 1px solid var(--border);
@@ -196,28 +252,58 @@
       color: #888;
       font-size: 14px;
       text-align: center;
-      padding: 20px;
+      padding: var(--space-4);
       box-sizing: border-box;
     }
+
     /* Navigation */
     .case-nav {
-      padding: clamp(40px, 6vw, 56px) 0 clamp(60px, 8vw, 90px);
+      padding: clamp(40px, 6vw, 56px) 0 max(clamp(60px, 8vw, 90px), calc(var(--safe-bottom) + 40px));
       display: flex;
       justify-content: space-between;
-      gap: 24px;
+      gap: var(--space-4);
       font-size: 15px;
       border-top: 1px solid var(--border);
       flex-wrap: wrap;
     }
+
     .case-nav a {
       color: var(--text);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.2s ease;
+      border-radius: 2px;
+      position: relative;
     }
+
     .case-nav a:hover {
       color: var(--accent);
     }
+
+    .case-nav a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* Subtle underline on hover for case-nav */
+    .case-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+
+    .case-nav a:hover::after,
+    .case-nav a:focus-visible::after {
+      transform: scaleX(1);
+    }
+
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 900px) {
       .challenge,
@@ -228,35 +314,40 @@
         grid-template-columns: 1fr;
         gap: 28px;
       }
+
       .full-image {
         aspect-ratio: 16 / 9;
       }
+
       .hero-content {
         max-width: 100%;
       }
     }
+
     @media (max-width: 600px) {
       .hero {
         min-height: 100svh;
       }
-      .top-nav {
-        padding-top: 18px;
-      }
+
       .project-label {
         font-size: 12px;
-        margin-bottom: 12px;
+        margin-bottom: var(--space-2);
       }
+
       h1 {
         font-size: clamp(28px, 8vw, 36px);
       }
+
       .section-text {
         font-size: 16px;
       }
+
       .case-nav {
         flex-direction: column;
-        gap: 16px;
+        gap: var(--space-3);
       }
     }
+
     @media (max-width: 380px) {
       h1 {
         font-size: 26px;
@@ -289,6 +380,7 @@
         </p>
       </div>
     </section>
+
     <!-- APPROACH + DESIGN SYSTEM -->
     <section>
       <div class="two-col">
@@ -305,6 +397,7 @@
           </p>
         </div>
       </div>
+
       <!-- Images -->
       <div class="image-block">
         <div class="image-grid">
@@ -317,6 +410,7 @@
         </div>
         <p class="caption">Selected spreads showing hierarchy, photography direction, and the data panel treatment.</p>
       </div>
+
       <div class="image-block">
         <div class="image-grid alt">
           <div class="placeholder tall">
@@ -328,10 +422,12 @@
         </div>
       </div>
     </section>
+
     <!-- Full width -->
     <div class="full-image">
       Wide overview – multiple spreads or full report feeling
     </div>
+
     <!-- OUTCOME -->
     <section>
       <div class="outcome">
@@ -341,6 +437,7 @@
         </p>
       </div>
     </section>
+
     <!-- Bottom nav -->
     <div class="case-nav">
       <a href="#">← Previous project</a>
