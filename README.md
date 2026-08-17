@@ -6,7 +6,7 @@ Welcome to my personal portfolio repository.
 
 Hi, I'm **Mike Demi**. This repository showcases my projects, skills, and work.
 
-📍 Based in Welland, Ontario, Canada
+📍 Based in Vaughan, Ontario, Canada
 
 ## Projects
 
