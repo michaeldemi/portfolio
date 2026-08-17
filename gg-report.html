@@ -180,88 +180,23 @@
       align-items: start;
     }
 
-    /* Images */
-    .image-block {
-      margin-top: clamp(32px, 5vw, 48px);
-    }
-
-    .image-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 18px;
-    }
-
-    .image-grid.alt {
-      grid-template-columns: 0.75fr 1.25fr;
-    }
-
-    .placeholder {
-      background: var(--light);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #888;
-      font-size: 13px;
-      text-align: center;
-      padding: var(--space-4);
-      transition: border-color 0.2s ease;
-    }
-
-    .placeholder:hover {
-      border-color: #ccc;
-    }
-
-    .placeholder.tall {
-      aspect-ratio: 3 / 4;
-    }
-
-    .placeholder.wide {
-      aspect-ratio: 16 / 10;
-    }
-
-    .caption {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: var(--space-2);
-      max-width: 520px;
-      line-height: 1.5;
-    }
-
-    /* Full-bleed spread image */
+    /* Spread images – never upscale beyond intrinsic size */
     .spread-image {
       width: 100vw;
       max-width: 100vw;
       margin-inline: calc(50% - 50vw);
-      display: block;
+      background-color: #dfdfdf;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       line-height: 0;
     }
 
     .spread-image img {
-      width: 100%;
+      width: auto;
+      max-width: 100%;
       height: auto;
       display: block;
-      vertical-align: middle;
-    }
-
-    /* Full width placeholder (kept for remaining placeholder) */
-    .full-image {
-      width: 100vw;
-      max-width: 100vw;
-      margin-inline: calc(50% - 50vw);
-      margin-top: var(--space-4);
-      aspect-ratio: 21 / 9;
-      background: var(--light);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #888;
-      font-size: 14px;
-      text-align: center;
-      padding: var(--space-4);
-      box-sizing: border-box;
     }
 
     /* Navigation */
@@ -316,15 +251,9 @@
       .challenge,
       .approach,
       .design-system,
-      .outcome,
-      .image-grid,
-      .image-grid.alt {
+      .outcome {
         grid-template-columns: 1fr;
         gap: 28px;
-      }
-
-      .full-image {
-        aspect-ratio: 16 / 9;
       }
 
       .hero-content {
@@ -400,7 +329,7 @@
     </section>
   </div>
 
-  <!-- Spread image between Approach and Design System -->
+  <!-- Spread 1 – between Approach and Design System -->
   <div class="spread-image">
     <img src="images/gg-sp-1_1929x1080.webp" alt="Green Guardians report interior spread showing photography and layout system" width="1929" height="1080" loading="lazy">
   </div>
@@ -414,37 +343,15 @@
           The system balances recognition and distinctiveness. It draws from the City’s existing colour and typography principles, then extends them with a tighter green-and-yellow palette, angled headers, and large impact figures. Consistent spacing and white data panels on light green stock make the metrics stand out. The same system was designed to move directly into presentation decks, creating one connected set of materials across the program.
         </p>
       </div>
-
-      <!-- Remaining placeholder images -->
-      <div class="image-block">
-        <div class="image-grid">
-          <div class="placeholder wide">
-            Interior spread – photographic
-          </div>
-          <div class="placeholder tall">
-            Detail – white data panels on light green
-          </div>
-        </div>
-        <p class="caption">Selected spreads showing hierarchy, photography direction, and the data panel treatment.</p>
-      </div>
-
-      <div class="image-block">
-        <div class="image-grid alt">
-          <div class="placeholder tall">
-            Typography & section header detail
-          </div>
-          <div class="placeholder wide">
-            Metrics / program update spread
-          </div>
-        </div>
-      </div>
     </section>
+  </div>
 
-    <!-- Full width placeholder -->
-    <div class="full-image">
-      Wide overview – multiple spreads or full report feeling
-    </div>
+  <!-- Spread 2 – after Design System -->
+  <div class="spread-image">
+    <img src="images/gg-sp-2_1929x1080.webp" alt="Green Guardians report metrics and program update spread" width="1929" height="1080" loading="lazy">
+  </div>
 
+  <div class="container">
     <!-- OUTCOME -->
     <section>
       <div class="outcome">
