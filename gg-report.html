@@ -54,8 +54,6 @@
     .container {
       max-width: 1100px;
       margin: 0 auto;
-      padding-left: max(var(--space-4), var(--safe-left));
-      padding-right: max(var(--space-4), var(--safe-right));
       padding-left: max(clamp(20px, 4vw, 32px), var(--safe-left));
       padding-right: max(clamp(20px, 4vw, 32px), var(--safe-right));
     }
@@ -171,20 +169,14 @@
       color: var(--text);
     }
 
-    /* Challenge & Outcome share the same layout */
+    /* Challenge, Approach, Design System, Outcome share the same layout */
     .challenge,
+    .approach,
+    .design-system,
     .outcome {
       display: grid;
       grid-template-columns: minmax(120px, 180px) 1fr;
       gap: clamp(24px, 4vw, 40px);
-      align-items: start;
-    }
-
-    /* Two column */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(36px, 6vw, 72px);
       align-items: start;
     }
 
@@ -236,7 +228,23 @@
       line-height: 1.5;
     }
 
-    /* Full width image – robust full-bleed */
+    /* Full-bleed spread image */
+    .spread-image {
+      width: 100vw;
+      max-width: 100vw;
+      margin-inline: calc(50% - 50vw);
+      display: block;
+      line-height: 0;
+    }
+
+    .spread-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      vertical-align: middle;
+    }
+
+    /* Full width placeholder (kept for remaining placeholder) */
     .full-image {
       width: 100vw;
       max-width: 100vw;
@@ -285,7 +293,6 @@
       outline-offset: 4px;
     }
 
-    /* Subtle underline on hover for case-nav */
     .case-nav a::after {
       content: "";
       position: absolute;
@@ -307,8 +314,9 @@
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 900px) {
       .challenge,
+      .approach,
+      .design-system,
       .outcome,
-      .two-col,
       .image-grid,
       .image-grid.alt {
         grid-template-columns: 1fr;
@@ -381,24 +389,33 @@
       </div>
     </section>
 
-    <!-- APPROACH + DESIGN SYSTEM -->
+    <!-- APPROACH -->
     <section>
-      <div class="two-col">
-        <div>
-          <div class="section-label">Approach</div>
-          <p class="section-text">
-            We set out to give the Green Guardians program a clear visual presence of its own — while remaining fully cohesive with the City of Vaughan’s wider brand guidelines. Rather than treating the annual report as a one-off document, we approached it as the foundation of a reusable visual language for the program.
-          </p>
-        </div>
-        <div>
-          <div class="section-label">Design System & Key Decisions</div>
-          <p class="section-text">
-            The system balances recognition and distinctiveness. It draws from the City’s existing colour and typography principles, then extends them with a tighter green-and-yellow palette, angled headers, and large impact figures. Consistent spacing and white data panels on light green stock make the metrics stand out. The same system was designed to move directly into presentation decks, creating one connected set of materials across the program.
-          </p>
-        </div>
+      <div class="approach">
+        <div class="section-label">Approach</div>
+        <p class="section-text">
+          We set out to give the Green Guardians program a clear visual presence of its own — while remaining fully cohesive with the City of Vaughan’s wider brand guidelines. Rather than treating the annual report as a one-off document, we approached it as the foundation of a reusable visual language for the program.
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Spread image between Approach and Design System -->
+  <div class="spread-image">
+    <img src="images/gg-sp-1_1929x1080.webp" alt="Green Guardians report interior spread showing photography and layout system" width="1929" height="1080" loading="lazy">
+  </div>
+
+  <div class="container">
+    <!-- DESIGN SYSTEM -->
+    <section>
+      <div class="design-system">
+        <div class="section-label">Design System & Key Decisions</div>
+        <p class="section-text">
+          The system balances recognition and distinctiveness. It draws from the City’s existing colour and typography principles, then extends them with a tighter green-and-yellow palette, angled headers, and large impact figures. Consistent spacing and white data panels on light green stock make the metrics stand out. The same system was designed to move directly into presentation decks, creating one connected set of materials across the program.
+        </p>
       </div>
 
-      <!-- Images -->
+      <!-- Remaining placeholder images -->
       <div class="image-block">
         <div class="image-grid">
           <div class="placeholder wide">
@@ -423,7 +440,7 @@
       </div>
     </section>
 
-    <!-- Full width -->
+    <!-- Full width placeholder -->
     <div class="full-image">
       Wide overview – multiple spreads or full report feeling
     </div>
